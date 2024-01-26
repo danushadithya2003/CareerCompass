@@ -1,0 +1,19 @@
+<div class="w-100 flex justify-between items-center bg-primary-bg px-4 py-3 font-poppins">
+    <div class="site-icon-title w-2/6 flex items-center">
+        <img 
+        src="../../assets/Images/Career_Compass_Logo_O.png" 
+        alt="Site Icon"
+        class="w-10 mr-1">
+        <div class="title flex justify-center items-center text-center text-2xl uppercase font-medium bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <a routerLink="/">Career Compass</a>
+        </div>
+    </div>
+    <div class="navlinks flex justify-evenly w-2/6 font-medium text-primary-txt text-lg">
+        <a routerLink="/" routerLinkActive="text-primary border-b-2 border-primary" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        <a routerLink="/skills" routerLinkActive="text-primary border-b-2 border-primary">Skills</a>
+        <a routerLink="/roles" routerLinkActive="text-primary border-b-2 border-primary">Roles</a>
+    </div>
+    <div class="cta-btn w-2/6 flex justify-end">
+        <div class="btn flex justify-end align-middle text-white px-5 py-1 bg-primary rounded-md text-lg cursor-pointer font-medium hover:bg-gradient-to-r from-primary to-secondary"><a routerLink="/login">Login</a></div>
+    </div>
+</div>
