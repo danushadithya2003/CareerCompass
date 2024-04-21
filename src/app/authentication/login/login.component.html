@@ -1,1 +1,46 @@
-<p>login works!</p>
+<div class="main flex justify-center items-center bg-primary-bg py-20 w-full  h-screen font-mono -mt-16">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-container w-4/12 h-max border-2 border-cst-pink rounded-md flex flex-col items-center p-4 space-y-4 bg-bg-blue">
+      <div class="title text-cst-pink text-2xl font-semibold flex justify-center items-center">
+        <span class="material-symbols-outlined text-5xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent">
+          explore
+          </span>
+          &nbsp;- Sign In</div>
+      <!-- Loading indicator -->
+      <div *ngIf="loading" class="bg-secondary-bg border border-cst-pink text-cst-pink px-4 py-3 rounded" role="alert">Signing you in...</div>
+      <!-- Success message dialog box -->
+      <div *ngIf="successMessage !== ''" class="border border-cst-green text-cst-green px-4 py-3 rounded" role="alert">
+          <span class="block sm:inline">{{ successMessage }}</span>
+      </div>
+      <!-- Error message dialog box -->
+      <div *ngIf="errorMessage !== ''" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+          <span class="block sm:inline">{{ errorMessage }}</span>
+  </div>
+      <div class="form-field flex flex-col w-full py-4">
+          <label for="email" class="pb-2 text-lg font-medium text-cst-pink">Email Id</label>
+            <input type="text" formControlName="email" id="email" placeholder="Enter your Email"
+            class="p-2 border-2 border-cst-pink bg-transparent focus:outline-none focus:border-2 rounded-md text-white">
+            <div *ngIf="formcontrol.email.invalid && (formcontrol.email.dirty || formcontrol.email.touched)" class="error text-sm py-2 text-red-500">
+              <div *ngIf="formcontrol.email.errors.required">Email is required</div>
+              <div *ngIf="formcontrol.email.errors.email">Enter a Valid Email</div>
+            </div>
+      </div>
+      <div class="py-4 flex flex-col w-full">
+          <label for="password" class="pb-2 text-lg font-medium text-cst-pink">Password</label>
+          <input type="password" formControlName="password" id="password" placeholder="Enter your password"
+          class="p-2 border-2 border-cst-pink bg-transparent focus:outline-none focus:border-2 rounded-md text-white">
+          <div *ngIf="formcontrol.password.invalid && (formcontrol.password.dirty || formcontrol.password.touched)" class="error text-sm py-2 text-red-500">
+              <div *ngIf="formcontrol.password.errors.required">Password is required</div>
+              <div *ngIf="!formcontrol.password.errors.required && formcontrol.password.errors.minlength">Password must be at least 8 characters</div>
+              <div *ngIf="!formcontrol.password.errors.required && !formcontrol.password.errors.minlength && formcontrol.password.errors.pattern">Password must contain at least one digit, one uppercase letter, one lowercase letter, and one special character</div>
+            </div>
+      </div>
+      <div class="flex justify-between items-center w-full text-cst-pink">
+          <div>
+              New User? <span class="text-white underline p-1 cursor-pointer" 
+              routerLink="/register">Register Here</span>
+          </div>
+          <button type="submit" class="text-white py-2 px-4 rounded-md text-lg cursor-pointer bg-gradient-to-r to-cst-pink from-cst-orange"
+          [disabled]="loginForm.invalid || loading">Sign In</button>
+      </div>
+    </form>
+</div>

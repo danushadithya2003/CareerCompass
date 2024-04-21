@@ -3,34 +3,46 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './Authentication/login/login.component';
+import { RegisterComponent } from './Authentication/register/register.component';
+import { HeaderComponent } from './header/header.component';
+import { RolesComponent } from './roles/roles.component';
+import { SkillsComponent } from './skills/skills.component';
 import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './authentication/login/login.component';
-import { RegisterComponent } from './authentication/register/register.component';
-import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
-import { SkillsAreaComponent } from './skills-area/skills-area.component';
-import { SkillsItemComponent } from './skills-area/skills-item/skills-item.component';
-import { RolesAreaComponent } from './roles-area/roles-area.component';
-import { RolesItemComponent } from './roles-area/roles-item/roles-item.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthService } from './Authentication/auth.service';
+import { AssessmentComponent } from './assessment/assessment.component';
+import { RoleDetailComponent } from './role-detail/role-detail.component';
+import { SkillDetailComponent } from './skill-detail/skill-detail.component';
+import { WebService } from './Services/web.service';
+import { SkillsService } from './Services/skills.service';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+import { ResultsComponent } from './results/results.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    NavbarComponent,
     LoginComponent,
     RegisterComponent,
-    ResetPasswordComponent,
-    SkillsAreaComponent,
-    SkillsItemComponent,
-    RolesAreaComponent,
-    RolesItemComponent
+    HeaderComponent,
+    RolesComponent,
+    SkillsComponent,
+    HomeComponent,
+    AssessmentComponent,
+    RoleDetailComponent,
+    SkillDetailComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    YouTubePlayerModule,
   ],
-  providers: [],
+  providers: [AuthService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,30 @@
+<div class="w-full h-16 flex justify-between items-center py-3 px-8 text-txt-white font-mono sticky top-0 transition-bg duration-300 ease-in-out;"
+[ngClass]="{'scrolled':isNavbarScrolled === true}">
+    <div class="logo w-2/6 flex justify-start items-center">
+        <span class="material-symbols-outlined text-5xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent cursor-pointer"
+        routerLink="/">
+        explore
+        </span>
+    </div>
+    <div class="nav-links flex justify-between w-2/6 text-txt-white text-lg" *ngIf="authService.isLoggedIn()">
+        <a class="px-2" routerLink="/" routerLinkActive="border-b-2 border-cst-pink rounded-sm" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        <a class="px-2" routerLink="/skills" routerLinkActive="border-b-2 border-cst-pink rounded-sm">Skills</a>
+        <a class="px-2" routerLink="/roles" routerLinkActive="border-b-2 border-cst-pink rounded-sm">Roles</a>
+        <a class="px-2" routerLink="/skilltest" routerLinkActive="border-b-2 border-cst-pink rounded-sm">Assess</a>
+    </div>
+    <div class="profile-cta flex justify-end w-2/4" *ngIf="!hideauthButtons && !authService.isLoggedIn()">
+        <div class="signin py-1 px-4 border-2 border-cst-pink rounded-lg text-lg cursor-pointer hover:bg-gradient-to-bl to-cst-pink from-cst-orange"
+        routerLink="/signin">Sign In</div>
+    </div>
+    <div class="profile-cta flex justify-end items-center w-2/6" *ngIf="authService.isLoggedIn()">
+        <div class="flex flex-col justify-start items-end">
+            <div class="text-white text-lg justify-end">{{authService.getUsername()}}</div>
+            <div class="text-white text-sm">{{authService.getEmail()}}</div>
+        </div>
+        <div class="flex justify-end items-end ml-2" >
+            <span class="material-symbols-outlined text-white text-4xl cursor-pointer" (click)="authService.logout()">
+                logout
+            </span>
+        </div>
+    </div>
+</div>

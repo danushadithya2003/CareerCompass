@@ -1,1 +1,84 @@
-<p>register works!</p>
+<div class="main flex justify-center items-center bg-primary-bg py-20 w-full  h-screen font-mono -mt-16">
+    <form *ngIf="!showOtpPopup" [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-container w-4/12 h-max border-2 border-cst-pink rounded-md flex flex-col items-center p-4 space-y-4 bg-bg-blue">
+      <div class="title text-cst-pink text-2xl font-semibold flex justify-center items-center">
+        <span class="material-symbols-outlined text-5xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent">
+          explore
+          </span>
+          &nbsp;- Register</div>
+      <!-- Loading indicator -->
+      <div *ngIf="loading" class="bg-secondary-bg border border-cst-pink text-cst-pink px-4 py-3 rounded" role="alert">Registering you in...</div>
+      <!-- Success message dialog box -->
+      <div *ngIf="successMessage !== ''" class="border border-cst-green text-cst-green px-4 py-3 rounded" role="alert">
+          <span class="block sm:inline">{{ successMessage }}</span>
+      </div>
+      <!-- Error message dialog box -->
+      <div *ngIf="errorMessage !== ''" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+          <span class="block sm:inline">{{ errorMessage }}</span>
+  </div>
+      <div class="form-field flex flex-col w-full py-4">
+          <label for="username" class="pb-2 text-lg font-medium text-cst-pink">Username</label>
+            <input type="text" formControlName="username" id="username" placeholder="Enter your Username"
+            class="p-2 border-2 border-cst-pink bg-transparent focus:outline-none focus:border-2 rounded-md text-white">
+            <div *ngIf="rformcontrol.username.invalid && (rformcontrol.username.dirty || rformcontrol.username.touched)" class="error text-sm py-2 text-red-500">
+              <div *ngIf="rformcontrol.username.errors.required">Username is required</div>
+              <div *ngIf="rformcontrol.username.errors.minlength">Username must be at least 3 characters long</div>
+              <div *ngIf="rformcontrol.username.errors.maxlength">Username cannot exceed 20 characters</div>
+            </div>
+      </div>
+      <div class="form-field flex flex-col w-full py-4">
+          <label for="email" class="pb-2 text-lg font-medium text-cst-pink">Email Id</label>
+            <input type="text" formControlName="email" id="email" placeholder="Enter your Email"
+            class="p-2 border-2 border-cst-pink bg-transparent focus:outline-none focus:border-2 rounded-md text-white">
+            <div *ngIf="rformcontrol.email.invalid && (rformcontrol.email.dirty || rformcontrol.email.touched)" class="error text-sm py-2 text-red-500">
+              <div *ngIf="rformcontrol.email.errors.required">Email is required</div>
+              <div *ngIf="rformcontrol.email.errors.email">Enter a Valid Email</div>
+            </div>
+      </div>
+      <div class="py-4 flex flex-col w-full">
+          <label for="password" class="pb-2 text-lg font-medium text-cst-pink">Password</label>
+          <input type="password" formControlName="password" id="password" placeholder="Enter your password"
+          class="p-2 border-2 border-cst-pink bg-transparent focus:outline-none focus:border-2 rounded-md text-white">
+          <div *ngIf="rformcontrol.password.invalid && (rformcontrol.password.dirty || rformcontrol.password.touched)" class="error text-sm py-2 text-red-500">
+              <div *ngIf="rformcontrol.password.errors.required">Password is required</div>
+              <div *ngIf="!rformcontrol.password.errors.required && rformcontrol.password.errors.minlength">Password must be at least 8 characters</div>
+              <div *ngIf="!rformcontrol.password.errors.required && !rformcontrol.password.errors.minlength && rformcontrol.password.errors.pattern">Password must contain at least one digit, one uppercase letter, one lowercase letter, and one special character</div>
+            </div>
+      </div>
+      <div class="flex justify-between items-center w-full text-cst-pink">
+          <div>
+              Existing User? <span class="text-white underline p-1 cursor-pointer" 
+              routerLink="/login">Login Here</span>
+          </div>
+          <button type="submit" class="text-white py-2 px-4 rounded-md text-lg cursor-pointer bg-gradient-to-r to-cst-pink from-cst-orange"
+          [disabled]="registerForm.invalid || loading">Register</button>
+      </div>
+    </form>
+<!-- otp-input.component.html -->
+<form *ngIf="showOtpPopup" [formGroup]="otpForm" (ngSubmit)="onOtpSubmit()" class="w-4/12 h-max border-2 border-cst-pink rounded-md flex flex-col justify-center items-center p-4 space-y-4 bg-bg-blue">
+    <div class="text-2xl font-bold bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent">Verify Email Address</div>
+    <!-- Loading indicator -->
+    <div *ngIf="loading" class="bg-secondary-bg border border-cst-pink text-cst-pink px-4 py-3 rounded" role="alert">Registering you in...</div>
+    <!-- Success message dialog box -->
+    <div *ngIf="successMessage !== ''" class="border border-cst-green text-cst-green px-4 py-3 rounded" role="alert">
+        <span class="block sm:inline">{{ successMessage }}</span>
+    </div>
+    <!-- Error message dialog box -->
+    <div *ngIf="errorMessage !== ''" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+        <span class="block sm:inline">{{ errorMessage }}</span>
+    </div>
+    <div class="flex flex-col justify-center items-center text-md text-center text-white">
+        We have sent an OTP to your registered email address {{registeredEmail}}.
+    </div>
+    <div>
+    <input class="w-12 h-12 bg-transparent border-cst-pink text-center border-2 text-white text-2xl rounded-md m-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none" type="number" formControlName="digit1" #otpInput (input)="onOtpInputChange($event, 0)" max=9 min=0>
+    <input class="w-12 h-12 bg-transparent border-cst-pink text-center border-2 text-white text-2xl rounded-md m-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none" type="number" formControlName="digit2" #otpInput (input)="onOtpInputChange($event, 1)" max=9 min=0>
+    <input class="w-12 h-12 bg-transparent border-cst-pink text-center border-2 text-white text-2xl rounded-md m-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none" type="number" formControlName="digit3" #otpInput (input)="onOtpInputChange($event, 2)" max=9 min=0>
+    <input class="w-12 h-12 bg-transparent border-cst-pink text-center border-2 text-white text-2xl rounded-md m-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none" type="number" formControlName="digit4" #otpInput (input)="onOtpInputChange($event, 3)" max=9 min=0>
+    <input class="w-12 h-12 bg-transparent border-cst-pink text-center border-2 text-white text-2xl rounded-md m-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none" type="number" formControlName="digit5" #otpInput (input)="onOtpInputChange($event, 4)" max=9 min=0>
+    <input class="w-12 h-12 bg-transparent border-cst-pink text-center border-2 text-white text-2xl rounded-md m-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none" type="number" formControlName="digit6" #otpInput (input)="onOtpInputChange($event, 5)" (keydown)="onLastInputKeydown($event)" maxlength="1">
+    </div>
+    <button type="submit" class="text-white py-1 px-4 rounded-lg text-lg cursor-pointer bg-gradient-to-bl to-cst-pink from-cst-orange">Verify</button>
+  </form>
+  
+  
+  </div>

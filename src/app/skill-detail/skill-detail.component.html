@@ -1,0 +1,278 @@
+<div
+  class="main flex flex-col items-center w-full h-max pb-10 font-mono -mt-16"
+>
+  <div class="flex flex-col items-center w-full" *ngIf="skill && !skillLoading">
+    <div
+      class="title mt-16 py-8 text-4xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent flex flex-col items-center justify-center"
+    >
+      <div class="flex justify-center items-center">
+        <img [src]="skill.image" alt="{{ skill.name }}" class="w-16 mr-2" />
+      </div>
+      <div class="font-bold text-4xl">
+        {{ skill.name }}
+      </div>
+    </div>
+    <div class="w-4/5 space-y-4">
+      <div class="text-3xl text-cst-pink">About</div>
+      <div class="text-txt-white pl-10 text-justify text-xl">
+        {{ skill.description }}
+      </div>
+    </div>
+    <div class="w-4/5 space-y-4 mt-10">
+      <div class="text-3xl text-cst-pink">Relevant Roles</div>
+      <div
+        class="text-txt-white text-xl pl-10"
+        *ngFor="let role of skill.roles"
+      >
+        <div
+          class="flex w-full space-x-4 items-center cursor-pointer"
+          (click)="navigateToRole(role.roleID)"
+        >
+          <div>
+            <img [src]="role.image" alt="{{ role.name }}" class="w-10" />
+          </div>
+          <div>
+            {{ role.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-4/5 space-y-4 mt-10">
+      <div class="text-3xl text-cst-pink">Youtube Resources</div>
+      <div
+        class="text-txt-white pl-10 text-justify text-xl"
+        *ngFor="let video of youTubeVideoInfo"
+      >
+        <a href="{{ video.videoUrl }}">
+          <div
+            class="w-full flex gap-4 p-4 rounded-md border-s-2 border-s-cst-pink"
+          >
+            <div class="w-1/6 h-1/3">
+              <img
+                src="{{ video.thumbnailUrl }}"
+                alt="{{ video.title }}"
+                class="w-full aspect-video"
+              />
+            </div>
+            <div class="flex flex-col justify-between w-5/6">
+              <div>
+                {{ video.title }}
+              </div>
+              <div class="flex">
+                <div class="mr-4">
+                  <i class="fa-solid fa-eye"></i> {{ video.viewCount }}
+                </div>
+                <div>
+                  <i class="fa-solid fa-thumbs-up"></i> {{ video.likeCount }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="w-4/5 space-y-4 mt-10">
+      <div class="text-3xl text-cst-pink">Online Courses</div>
+      <div
+        class="text-txt-white pl-10 text-justify text-xl"
+        *ngFor="let course of skill.courses"
+      >
+        <div>
+          <a href="{{ course }}"
+            ><i class="fa-solid fa-book-open-reader"></i> {{ course }}</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="w-4/5 space-y-4 mt-10">
+      <div class="text-3xl text-cst-pink">Web Resources</div>
+      <div
+        class="text-txt-white pl-10 text-justify text-xl"
+        *ngFor="let site of skill.website"
+      >
+        <div>
+          <a href="{{ site }}"><i class="fa-solid fa-link"></i> {{ site }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Seperator -->
+  <div
+  *ngIf="skill && questions"
+    class="w-full h-1 bg-gradient-to-r from-cst-orange to-cst-pink my-8"
+  ></div>
+  <!-- Community Forum -->
+  <div class="flex flex-col w-5/6 py-4" *ngIf="skill && !skillLoading">
+    <div
+      class="text-4xl font-bold bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent flex flex-col items-center justify-center"
+    >
+      <i class="fa-solid fa-users-line m-2"></i> {{ skill.name }} Community
+      Forum
+    </div>
+    <div class="flex w-full justify-end items-center py-4">
+        <div class="flex justify-center items-center p-2 rounded-md bg-gradient-to-r from-cst-orange  to-cst-pink text-white cursor-pointer"
+        (click)="toggleOverlay()">
+            <span class="material-symbols-outlined">
+                person_raised_hand
+            </span> Ask a Question
+        </div>
+    </div>
+    <!-- Overlay div -->
+    <div *ngIf="showOverlay" class="overlay fixed inset-0 flex justify-center items-center z-20">
+        <!-- Blurred background -->
+        <div class="absolute inset-0 bg-black bg-opacity-75 blur"></div>
+    
+        <!-- Centered content -->
+        <div class="bg-bg-blue p-6 rounded w-5/12 relative h-max flex flex-col items-center border-2 border-cst-pink">
+            <div class="text-3xl font-bold bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent py-4">
+                <span class="material-symbols-outlined">
+                    person_raised_hand
+                </span> Ask a Question
+            </div>
+            <!-- Form -->
+            <form [formGroup]="questionForm" (ngSubmit)="onQuestionSubmit()" class="w-full flex flex-col space-y-4">
+                <!-- Your form fields go here -->
+                <div>
+                    <label for="title" class="pb-2 text-lg font-medium text-cst-pink">Title</label>
+                <input type="text" placeholder="Title" formControlName="title"
+                class="bg-transparent border-2 border-cst-pink text-white outline-none w-full rounded-md px-4 py-2 mt-2"
+                id="title"
+                >
+                </div>
+                <div>
+                <label for="content" class="pb-2 text-lg font-medium text-cst-pink mt-4">Description</label>
+                <textarea formControlName="content" id="content" class="bg-transparent border-2 border-cst-pink text-white outline-none w-full rounded-md px-4 py-2 mt-2
+                resize-none h-32"
+                placeholder="Give a Detailed Description About Your Issue"></textarea>
+                </div>
+                <!-- Submit and cancel buttons -->
+                <div class="flex justify-between">
+                    <button type="button" (click)="toggleOverlay()" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Cancel</button>
+                    <button type="submit" class="bg-gradient-to-r from-cst-orange to-cst-pink text-white font-bold py-2 px-4 rounded">Ask to Community</button>
+                </div>
+            </form>
+        </div>
+    </div>
+<div *ngIf="questions && !questionLoading">
+    <div
+    class="w-full py-4 text-white flex flex-col"
+    *ngFor="let question of questions;let i = index;"
+  >
+    <div class="flex flex-col bg-white bg-opacity-5 rounded-lg p-2">
+      <div
+        class="flex space-x-4 text-2xl items-center font-bold text-cst-green"
+      >
+        <div
+          class="border-2 w-10 h-10 aspect-square border-cst-green p-2 rounded-full flex justify-center items-center"
+        >
+          {{i+1}}
+        </div>
+        <div>
+          {{question.title}}
+        </div>
+      </div>
+      <div class="flex space-x-4 text-sm items-center uppercase font-bold">
+        <div
+          class="w-10 h-10 aspect-square flex justify-center items-center"
+        ></div>
+        <div
+          class="flex justify-between items-center w-full pr-10 border-s border-s-white border-opacity-5 py-2 rounded-lg"
+        >
+          <div>
+            Asked by :
+            {{question.userName}}
+          </div>
+          <div>Asked on : {{ question.createdAt }}</div>
+        </div>
+      </div>
+      <div class="flex space-x-4 text-lg items-center">
+        <div
+          class="w-10 h-10 aspect-square flex justify-center items-center"
+        ></div>
+        <div class="pr-7 py-4 text-justify w-full">
+          {{question.content}}
+        </div>
+      </div>
+      <div class="flex space-x-4 text-sm items-center uppercase font-bold">
+        <div
+          class="w-10 h-10 aspect-square flex justify-center items-center"
+        ></div>
+        <div
+          class="uppercase text-cst-green pb border-b border-cst-green cursor-pointer flex justify-center items-center"
+          (click)="toggleReplies(question)">
+          See Replies ({{ question.answers?.length || 0 }})&nbsp;
+          <i
+            class="fa-solid fa-caret-right"
+            *ngIf="!question.showReplies"
+          ></i>
+          <i class="fa-solid fa-caret-down" *ngIf="question.showReplies"></i>
+        </div>
+        <div class="uppercase">
+          <span *ngIf="question.status === 'Unresolved'"
+            ><i class="fa-solid fa-lock-open"></i> OPEN</span
+          >
+          <span *ngIf="question.status != 'Unresolved'"
+            ><i class="fa-solid fa-lock"></i> CLOSED</span
+          >
+        </div>
+      </div>
+      <div class="flex flex-col pl-14 w-full" *ngIf="question.showReplies">
+        <div *ngFor="let answer of question.answers">
+          <div
+            class="flex flex-col w-full justify-between my-4 p-4 rounded-lg border-2 border-white border-opacity-15"
+          >
+            <div class="text-md text-white">
+              {{answer.content}}
+            </div>
+            <div class="flex flex-col space-y-1 items-end pt-4">
+              <div class="flex space-x-2 justify-end">
+                <div class="flex items-center text-sm font-thin">
+                  {{answer.userName}}
+                  , 
+              </div>
+                <div class="flex items-center text-sm font-thin">
+                  {{answer.createdAt}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col pl-14 w--full" *ngIf="question.showReplies &&(!question.answers || question.answers.length === 0)">
+          <div
+          class="flex flex-col w-full justify-between my-4 p-4 rounded-lg border-2 border-white border-opacity-15"
+        >
+        No Answers Yet
+      </div>
+  </div>
+      <div class="flex pl-14 pt-5 w-full justify-center items-center">
+          <form [formGroup]="replyForm" (ngSubmit)="onReplySubmit(question.questionID,question)" class="w-full flex justify-between items-center">
+              <textarea formControlName="replyInput" class="bg-transparent outline-none border-l-2 border-y-2 border-cst-green rounded-l-md resize-none w-11/12 h-14 "></textarea>
+              <button type="submit" [disabled]="!replyForm.valid" 
+              class="w-1/12 bg-cst-green rounded-r-md h-14 font-bold"> 
+                  <i class="fa-regular fa-paper-plane"></i> Answer
+              </button>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="questionLoading" class="w-full flex justify-center items-center py-4 text-4xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent">
+    <span class="material-symbols-outlined text-5xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent">
+    explore
+    </span> Loading Forum ....
+</div>
+  </div>
+
+  <!-- Loader -->
+  <div
+  *ngIf="skillLoading" 
+  class="main w-full h-screen flex justify-center items-center p-2 text-xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent">
+    <span class="material-symbols-outlined text-5xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent cursor-pointer"
+    routerLink="/">
+    explore
+    </span> LoADING .....
+  </div>
+</div>
+
+  

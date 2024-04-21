@@ -1,0 +1,43 @@
+<div class="main flex flex-col items-center w-full h-screen font-mono -mt-16">
+  <div *ngIf="role && !loading" class="flex flex-col items-center w-full">
+    <div class="title mt-16 py-8 text-4xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent flex flex-col items-center justify-center">
+        <div class="flex justify-center items-center">
+            <img [src]="role.image" alt="{{ role.name }}" class="w-16 mr-2" />
+          </div>
+          <div class="font-bold text-4xl">
+            {{ role.name }}
+          </div>
+    </div>
+    <div class="w-4/5 space-y-4">
+        <div class="text-3xl text-cst-pink">
+            About
+        </div>
+        <div class="text-txt-white pl-10 text-justify text-xl">
+            {{role.description}}
+        </div>
+    </div>
+    <div class="w-4/5 space-y-4 mt-10">
+        <div class="text-3xl text-cst-pink">
+            Skillset Required
+        </div>
+        <div class="text-txt-white text-xl pl-10" *ngFor="let skill of role.skills">
+            <div class="flex w-full space-x-4 items-center cursor-pointer" (click)="navigateToSkill(skill.skillID)">
+              <div>
+                <img [src]="skill.image" alt="{{skill.name}}" class="w-10">
+              </div>
+              <div>
+                {{skill.name}}
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div
+  *ngIf="loading" 
+  class="w-full h-screen flex justify-center items-center p-2 text-xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent">
+    <span class="material-symbols-outlined text-5xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent cursor-pointer"
+    routerLink="/">
+    explore
+    </span> Loading Role
+  </div>
+</div>

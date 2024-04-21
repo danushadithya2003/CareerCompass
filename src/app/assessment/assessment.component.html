@@ -1,0 +1,38 @@
+<div class="main flex flex-col items-center w-full font-mono -mt-16">
+<div class="w-5/6 flex flex-col mt-24">
+    <div class="title w-full justify-center flex text-4xl pb-2 font-bold
+    bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent">Self Skill Assesment</div>
+    <div class="subtitle w-full justify-center flex text-lg pb-12 text-white">Take a Self Assessment to find your perfect role in the world of oppurtunities</div>
+    <form [formGroup]="expertiseForm" (ngSubmit)="onSubmit()">
+        <div *ngFor="let skill of skills" class="flex justify-center items-center w-full p-4">
+          <div class="flex text-white text-xl w-2/12"><label>{{ skillsLabels[skill] }}</label></div>
+          <div class="flex justify-between items-center w-10/12">
+            <button class="bg-bg-blue border-2 border-white text-md p-2 rounded-md text-txt-white" 
+            [ngClass]="{'bg-red-500 border-0 text-white': expertiseForm.get(skill.toLowerCase()).value === 1}"
+            type="button" (click)="setValue(skill.toLowerCase(), 1)">Not Interested</button>
+            <button class="bg-bg-blue border-2 border-white text-md p-2 rounded-md text-txt-white" 
+            [ngClass]="{'bg-orange-700 border-0 text-white': expertiseForm.get(skill.toLowerCase()).value === 2}"
+            type="button" (click)="setValue(skill.toLowerCase(), 2)">Poor</button>
+            <button class="bg-bg-blue border-2 border-white text-md p-2 rounded-md text-txt-white" 
+            [ngClass]="{'bg-orange-500 border-0 text-white': expertiseForm.get(skill.toLowerCase()).value === 3}"
+            type="button" (click)="setValue(skill.toLowerCase(), 3)">Beginner</button>
+            <button class="bg-bg-blue border-2 border-white text-md p-2 rounded-md text-txt-white" 
+            [ngClass]="{'bg-yellow-500 border-0 text-black': expertiseForm.get(skill.toLowerCase()).value === 5}"
+            type="button" (click)="setValue(skill.toLowerCase(), 5)">Average</button>
+            <button class="bg-bg-blue border-2 border-white text-md p-2 rounded-md text-txt-white" 
+            [ngClass]="{'bg-lime-500 border-0 text-white': expertiseForm.get(skill.toLowerCase()).value === 6}"
+            type="button" (click)="setValue(skill.toLowerCase(), 6)">Intermediate</button>
+            <button class="bg-bg-blue border-2 border-white text-md p-2 rounded-md text-txt-white" 
+            [ngClass]="{'bg-green-500 border-0 text-white': expertiseForm.get(skill.toLowerCase()).value === 7}"
+            type="button" (click)="setValue(skill.toLowerCase(), 7)">Excellent</button>
+            <button class="bg-bg-blue border-2 border-white text-md p-2 rounded-md text-txt-white" 
+            [ngClass]="{'bg-green-700 border-0 text-white': expertiseForm.get(skill.toLowerCase()).value === 9}"
+            type="button" (click)="setValue(skill.toLowerCase(), 9)">Professional</button>
+          </div>
+        </div>
+        <div class="w-full flex justify-end p-4">
+            <button type="submit" class="px-4 py-2 bg-cst-pink text-white rounded-md">Submit</button>
+        </div>
+      </form>
+</div>
+</div>
