@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { AuthService } from '../Authentication/auth.service';
+import { AuthService } from '../authentication/auth.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 

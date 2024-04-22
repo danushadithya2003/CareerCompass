@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -57,7 +58,7 @@ export class LoginComponent {
           } else if (error.status === 400) {
             this.errorMessage = 'Invalid request';
           } else {
-            this.errorMessage = 'Server error';
+            this.errorMessage = 'Invalid Credentials';
           }
           setTimeout(()=>{
               this.errorMessage = ''

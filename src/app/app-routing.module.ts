@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { RolesComponent } from './roles/roles.component';
 import { SkillsComponent } from './skills/skills.component';
-import { LoginComponent } from './Authentication/login/login.component';
-import { RegisterComponent } from './Authentication/register/register.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { RegisterComponent } from './authentication/register/register.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { RoleDetailComponent } from './role-detail/role-detail.component';
 import { SkillDetailComponent } from './skill-detail/skill-detail.component';
 import { ResultsComponent } from './results/results.component';
+import { AuthGuard } from './authentication/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,10 +18,12 @@ const routes: Routes = [
   },
   {
     path: 'roles',
+    canActivate:[AuthGuard],
     component: RolesComponent,
   },
   {
     path: 'skills',
+    canActivate:[AuthGuard],
     component: SkillsComponent,
   },
   {
@@ -33,18 +36,22 @@ const routes: Routes = [
   },
   {
     path: 'skilltest',
+    canActivate:[AuthGuard],
     component: AssessmentComponent,
   },
   { 
-    path: 'role/:roleId', 
+    path: 'role/:roleId',
+    canActivate:[AuthGuard], 
     component: RoleDetailComponent
    },
    {
     path: 'skill/:skillId',
+    canActivate:[AuthGuard],
     component: SkillDetailComponent
    },
    {
     path: 'results',
+    canActivate:[AuthGuard],
     component: ResultsComponent
    }
 ];

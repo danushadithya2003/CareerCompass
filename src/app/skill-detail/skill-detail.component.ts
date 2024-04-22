@@ -48,6 +48,7 @@ export class SkillDetailComponent {
     this.skillService.getSkill(skillId).subscribe((data) => {
       this.skill = data.data;
       console.log(this.skill);
+      this.getVideosInfo(this.skill)
       this.skillLoading = false
     });
     this.getQuestions(skillId)

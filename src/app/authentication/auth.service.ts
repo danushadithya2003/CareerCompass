@@ -28,6 +28,6 @@ export class AuthService {
 
   logout(): void {
     localStorage.clear();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/signin'])
   }
 }
