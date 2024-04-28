@@ -35,4 +35,8 @@ export class ForumService{
 
         return this.http.post(`https://apicareercompass.azurewebsites.net/answer`,body,{params:this.queryparams})
     }
+
+    updateStatus(questionId:string) {
+        return this.http.put(`https://apicareercompass.azurewebsites.net/${questionId}/question?status=Resolved&token=${this.token}`,null)
+    }
 }

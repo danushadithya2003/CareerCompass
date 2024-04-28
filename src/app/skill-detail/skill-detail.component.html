@@ -207,13 +207,18 @@
           ></i>
           <i class="fa-solid fa-caret-down" *ngIf="question.showReplies"></i>
         </div>
-        <div class="uppercase">
+        <div class="uppercase flex space-x-4">
           <span *ngIf="question.status === 'Unresolved'"
-            ><i class="fa-solid fa-lock-open"></i> OPEN</span
+            (click)="updateStatus(question)" ><i class="fa-solid fa-lock-open"></i> OPEN</span
           >
           <span *ngIf="question.status != 'Unresolved'"
             ><i class="fa-solid fa-lock"></i> CLOSED</span
           >
+          <span *ngIf="question.status === 'Unresolved' && question.confirmUpdate" class="flex space-x-4">
+            <span class="text-cst-blue">Resolve Question?</span>
+            <span class="text-cst-green" (click)="confirmStatus(question)">Yes</span>
+            <span class="text-red-500" (click)="question.confirmUpdate=false">No</span>
+          </span>
         </div>
       </div>
       <div class="flex flex-col pl-14 w-full" *ngIf="question.showReplies">
@@ -271,8 +276,9 @@
     <span class="material-symbols-outlined text-5xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent cursor-pointer"
     routerLink="/">
     explore
-    </span> LoADING .....
+    </span> Loading .....
   </div>
+
 </div>
 
   

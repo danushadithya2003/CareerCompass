@@ -19,11 +19,12 @@ export class AuthService {
     return localStorage.getItem('email')
   }
 
-  setlogin(username: string,email:string,token:string,role:string): void {
+  setlogin(username: string,email:string,token:string,role:string,userID:string): void {
     localStorage.setItem('username', username);
     localStorage.setItem('email', email);
     localStorage.setItem('token', token);
     localStorage.setItem('role', role);
+    localStorage.setItem('userID',userID)
   }
 
   logout(): void {

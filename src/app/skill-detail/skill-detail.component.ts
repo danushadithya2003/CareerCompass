@@ -73,6 +73,7 @@ export class SkillDetailComponent {
         question.updatedAt = this.formatDate(question.updatedAt);
         question.showReplies = false
         question.reply = false
+        question.confirmUpdate =false
         // Iterate through each answer of the question
         if (question.answers && question.answers.length > 0) {
           question.answers.forEach((answer) => {
@@ -159,5 +160,18 @@ export class SkillDetailComponent {
   }
   toggleOverlay() {
     this.showOverlay = !this.showOverlay;
+  }
+
+  updateStatus(question:any){
+    if(question.userID == localStorage.getItem('userID')){
+        question.confirmUpdate = true
+    }
+  }
+
+  confirmStatus(question) {
+    this.forumService.updateStatus(question.questionID).subscribe(()=>{
+      const skillId = this.route.snapshot.paramMap.get('skillId');
+        this.getQuestions(skillId);
+    })
   }
 }

@@ -1,43 +1,86 @@
-<div class="main flex flex-col items-center w-full h-screen font-mono -mt-16">
+<div
+  class="main flex flex-col items-center w-full h-max min-h-screen pb-10 font-mono -mt-16"
+>
   <div *ngIf="role && !loading" class="flex flex-col items-center w-full">
-    <div class="title mt-16 py-8 text-4xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent flex flex-col items-center justify-center">
-        <div class="flex justify-center items-center">
-            <img [src]="role.image" alt="{{ role.name }}" class="w-16 mr-2" />
-          </div>
-          <div class="font-bold text-4xl">
-            {{ role.name }}
-          </div>
+    <div
+      class="title mt-16 py-8 text-4xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent flex flex-col items-center justify-center"
+    >
+      <div class="flex justify-center items-center">
+        <img [src]="role.image" alt="{{ role.name }}" class="w-16 mr-2" />
+      </div>
+      <div class="font-bold text-4xl">
+        {{ role.name }}
+      </div>
     </div>
     <div class="w-4/5 space-y-4">
-        <div class="text-3xl text-cst-pink">
-            About
-        </div>
-        <div class="text-txt-white pl-10 text-justify text-xl">
-            {{role.description}}
-        </div>
+      <div class="text-3xl text-cst-pink">About</div>
+      <div class="text-txt-white pl-10 text-justify text-xl">
+        {{ role.description }}
+      </div>
+      <div class="text-txt-white pl-10 text-justify text-xl">
+        <span class="space-x-4">Average Salary:</span> {{role.salary}}
+      </div>
     </div>
     <div class="w-4/5 space-y-4 mt-10">
-        <div class="text-3xl text-cst-pink">
-            Skillset Required
+      <div class="text-3xl text-cst-pink">Duties</div>
+      <div
+        class="text-txt-white text-xl pl-10"
+        *ngFor="let duty of role.duties"
+      >
+        <div class="flex w-full space-x-4 items-center cursor-pointer">
+          <div>
+            <i class="fa-regular fa-square-check space-x-3"></i> {{ duty }}
+          </div>
         </div>
-        <div class="text-txt-white text-xl pl-10" *ngFor="let skill of role.skills">
-            <div class="flex w-full space-x-4 items-center cursor-pointer" (click)="navigateToSkill(skill.skillID)">
-              <div>
-                <img [src]="skill.image" alt="{{skill.name}}" class="w-10">
-              </div>
-              <div>
-                {{skill.name}}
-              </div>
+      </div>
+    </div>
+    <div class="w-4/5 space-y-4 mt-10">
+      <div class="text-3xl text-cst-pink">Top Career Destinations</div>
+      <div
+        class="text-txt-white text-xl pl-10"
+        *ngFor="let company of role.companies"
+      >
+        <a href={{company.link}}>
+          <div class="flex w-full space-x-4 items-center cursor-pointer">
+            <div class="w-10 h-10 flex items-center">
+              <img [src]="company.image" alt="{{ company.name }}" />
             </div>
+            <div>
+              {{ company.name }}
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="w-4/5 space-y-4 mt-10">
+      <div class="text-3xl text-cst-pink">Skillset Required</div>
+      <div
+        class="text-txt-white text-xl pl-10"
+        *ngFor="let skill of role.skills"
+      >
+        <div
+          class="flex w-full space-x-4 items-center cursor-pointer"
+          (click)="navigateToSkill(skill.skillID)"
+        >
+          <div>
+            <img [src]="skill.image" alt="{{ skill.name }}" class="w-10" />
+          </div>
+          <div>
+            {{ skill.name }}
+          </div>
         </div>
+      </div>
     </div>
   </div>
   <div
-  *ngIf="loading" 
-  class="w-full h-screen flex justify-center items-center p-2 text-xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent">
-    <span class="material-symbols-outlined text-5xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent cursor-pointer"
-    routerLink="/">
-    explore
-    </span> Loading Role
+    *ngIf="loading"
+    class="w-full h-screen flex justify-center items-center p-2 text-xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent"
+  >
+    <span
+      class="material-symbols-outlined text-5xl bg-gradient-to-r from-cst-orange to-cst-pink bg-clip-text text-transparent cursor-pointer"
+    >
+      explore
+    </span>
+    Loading Role
   </div>
 </div>

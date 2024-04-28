@@ -47,7 +47,7 @@ export class LoginComponent {
           },1500)
           setTimeout(()=>{
             this.successMessage = ''
-            this.authService.setlogin(userdata.username,userdata.email,userdata.token,userdata.role)
+            this.authService.setlogin(userdata.username,userdata.email,userdata.token,userdata.role,userdata.userID)
             this.router.navigate(['/'])
           },3000)
         },
