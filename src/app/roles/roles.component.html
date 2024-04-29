@@ -32,19 +32,21 @@
       </div>
     </form>
   </div>
-  <div class="cards w-full grid grid-cols-4 px-8 gap-6 py-10" *ngIf="!loading && roles">
+  <div class="cards w-full grid grid-cols-3 px-8 gap-x-10 gap-y-5 py-10" *ngIf="!loading && roles">
     <div
       *ngFor="let role of roles"
-      class="cursor-pointer flex justify-center items-center border-4 border-bg-blue py-4 bg-bg-blue border-l bordere-l-cst-blue"
+      class="cursor-pointer flex pl-10 items-center border-2 border-bg-blue py-4 bg-black
+      text-txt-white bg-opacity-15 rounded-lg
+      hover:text-cst-pink hover:bg-bg-blue hover:bg-opacity-100 hover:border-2 hover:border-cst-pink"
     >
       <div
-        class="text text-txt-white bg-bg-blue font-semibold text-xl w-full flex justify-center"
+        class="text  font-semibold text-xl w-full flex items-center"
         (click)="navigateToRole(role.roleID)"
       >
-        <div class="flex justify-center items-center">
+        <div class="flex items-center">
           <img [src]="role.image" alt="{{ role.name }}" class="w-8 mr-2" />
         </div>
-        <div>
+        <div class="capitalize">
           {{ role.name }}
         </div>
       </div>
