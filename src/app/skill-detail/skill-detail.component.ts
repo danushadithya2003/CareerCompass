@@ -108,7 +108,7 @@ export class SkillDetailComponent {
   }
 
   navigateToRole(roleId: number) {
-    this.router.navigate(['/role',roleId]);
+    this.router.navigate(['/roles',roleId]);
   }
 
   formatDate(dateString: string): string {

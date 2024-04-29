@@ -74,25 +74,32 @@
     <div class="w-4/5 space-y-4 mt-10">
       <div class="text-3xl text-cst-pink">Online Courses</div>
       <div
-        class="text-txt-white pl-10 text-justify text-xl"
+        class="text-txt-white pl-10 text-xl"
         *ngFor="let course of skill.courses"
       >
-        <div>
-          <a href="{{ course }}"
-            ><i class="fa-solid fa-book-open-reader"></i> {{ course }}</a
-          >
-        </div>
+      <a href="{{ course }}">
+        <div class="flex items-center space-x-4">
+            <div>
+              <i class="fa-solid fa-book-open-reader"></i>
+            </div> 
+            <div>
+              {{ course }}
+            </div>
+          </div>
+        </a>
       </div>
     </div>
     <div class="w-4/5 space-y-4 mt-10">
       <div class="text-3xl text-cst-pink">Web Resources</div>
       <div
-        class="text-txt-white pl-10 text-justify text-xl"
+        class="text-txt-white pl-10 flex text-xl"
         *ngFor="let site of skill.website"
       >
-        <div>
-          <a href="{{ site }}"><i class="fa-solid fa-link"></i> {{ site }}</a>
+      <a href="{{site}}"> 
+        <div class="flex items-center space-x-4">
+          <div><i class="fa-solid fa-link"></i></div> <div>{{ site }}</div>
         </div>
+      </a>
       </div>
     </div>
   </div>

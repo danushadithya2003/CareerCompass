@@ -26,6 +26,6 @@ export class ResultsComponent {
   }
 
   navigateToRole(roleId:string) {
-    this.router.navigate(['/role',roleId]);
+    this.router.navigate(['/roles',roleId]);
   }
 }

@@ -31,7 +31,7 @@ export class RolesComponent {
   }
 
   navigateToRole(roleId: number) {
-    this.router.navigate(['/role',roleId]);
+    this.router.navigate(['/roles',roleId]);
   }
 
   onSubmit() {

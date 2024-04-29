@@ -32,7 +32,7 @@ export class SkillsComponent {
   }
 
   navigateToSkill(skillId:number) {
-    this.router.navigate(['/skill',skillId]);
+    this.router.navigate(['/skills',skillId]);
   }
 
   onSubmit() {

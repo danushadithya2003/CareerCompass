@@ -18,6 +18,7 @@ import { SkillDetailComponent } from './skill-detail/skill-detail.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { ResultsComponent } from './results/results.component';
 import { DatePipe } from '@angular/common';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DatePipe } from '@angular/common';
     AssessmentComponent,
     RoleDetailComponent,
     SkillDetailComponent,
-    ResultsComponent
+    ResultsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

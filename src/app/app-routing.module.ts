@@ -40,12 +40,12 @@ const routes: Routes = [
     component: AssessmentComponent,
   },
   { 
-    path: 'role/:roleId',
+    path: 'roles/:roleId',
     canActivate:[AuthGuard], 
     component: RoleDetailComponent
    },
    {
-    path: 'skill/:skillId',
+    path: 'skills/:skillId',
     canActivate:[AuthGuard],
     component: SkillDetailComponent
    },
